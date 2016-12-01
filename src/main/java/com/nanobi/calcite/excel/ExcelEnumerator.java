@@ -62,7 +62,6 @@ import com.monitorjbl.xlsx.StreamingReader;
  */
 class ExcelEnumerator<E> implements Enumerator<E> {
 	Iterator<Row> reader;
-	private final String[] filterValues;
 	private final AtomicBoolean cancelFlag;
 	private final RowConverter<E> rowConverter;
 	private E current;
@@ -94,8 +93,6 @@ class ExcelEnumerator<E> implements Enumerator<E> {
 			String[] filterValues, RowConverter<E> rowConverter) {
 		this.cancelFlag = cancelFlag;
 		this.rowConverter = rowConverter;
-		this.filterValues = filterValues;
-
 		try {
 			if (stream) {
 				// this.reader = new CsvStreamReader(file);
