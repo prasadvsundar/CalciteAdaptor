@@ -69,8 +69,17 @@ enum ExcelFieldType {
 		  try{
 			  if (HSSFDateUtil.isCellDateFormatted(cell)){
 				  return MAP.get("date");
-			    }
-			  return MAP.get("int");
+			   }
+			   try{
+					if(cell.getStringCellValue().contains(".")){
+						Double.parseDouble(cell.getStringCellValue());
+						return MAP.get("double");
+					}else{
+						 return MAP.get("int");
+					}
+				}catch(Exception e1){
+					return MAP.get("int");
+				}
 			  }catch(Exception e){
 				  return MAP.get("int");
 			  }

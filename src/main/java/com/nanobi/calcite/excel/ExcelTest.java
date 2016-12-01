@@ -26,17 +26,17 @@ public class ExcelTest {
 	                connection.unwrap(CalciteConnection.class);
 	        SchemaPlus rootSchema = calciteConnection.getRootSchema(); 
 	        
-	        File csvDir = new File("/home/nanobi/Drill/Excel/");
+	        File csvDir = new File("/home/nanobi/Drill/CSV/");
 	        // SchemaPlus schema = rootSchema.add("s", new CsvSchema(csvDir,null)); 
 	        //rootSchema.add("CSV", new CsvSchema(csvDir, Flavor.SCANNABLE));
 	         //rootSchema.add("EXCEL", new ExcelSchema(csvDir, Flavor.TRANSLATABLE));
-	         rootSchema.add("EXCEL.bugs", new ExcelSchema(csvDir, Flavor.TRANSLATABLE, "bugs"));
+	         rootSchema.add("EXCEL", new ExcelSchema(csvDir, Flavor.TRANSLATABLE, "Product_Dim"));
 		
 		 Statement statement = connection.createStatement();
-	     ResultSet resultSet =   statement.executeQuery("select * from \"EXCEL.bugs\".\"bugsb\"");
+	     ResultSet resultSet =   statement.executeQuery("select * from \"EXCEL\".\"Product_Dim1\"");
 		// ResultSet resultSet =   statement.executeQuery("select * from \"EXCEL\".\"bugsb\"");
 	     StringBuilder buf = new StringBuilder();
-	     try{
+	     /*   try{
 	     while (resultSet.next()) {
 	            int n = resultSet.getMetaData().getColumnCount();
 	           // System.out.println(n);
@@ -57,17 +57,17 @@ public class ExcelTest {
 	    	 e.printStackTrace();
 	    	 
 	     }
-	    
-	     /*while (resultSet.next()) {
+	    */
+	     while (resultSet.next()) {
 	    	 int n = resultSet.getMetaData().getColumnCount();
 	    	 for (int i = 1; i <= n; i++) {
 	    		 System.out.println(resultSet.getMetaData().getColumnTypeName(i));
 	    	 }
-	           
+	           break;
 	            //System.out.println(resultSet.getObject("date"));
 	           // Date d =(Date) resultSet.getObject("date");
 	            //System.out.println(d);
-	        }*/
+	        }
 	     
 	       
 	}

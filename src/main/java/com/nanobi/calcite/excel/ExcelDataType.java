@@ -104,7 +104,15 @@ public class ExcelDataType {
 		switch (cell.getCellType()) {
 		
 		case Cell.CELL_TYPE_NUMERIC: {
-			return cell.getNumericCellValue();
+			try{
+				if(cell.getStringCellValue().contains(".")){
+					return Double.parseDouble(cell.getStringCellValue());
+				}else{
+					return cell.getNumericCellValue();
+				}
+			}catch(Exception e1){
+				return cell.getNumericCellValue();
+			}
 		}
 		
 		case Cell.CELL_TYPE_BOOLEAN:{

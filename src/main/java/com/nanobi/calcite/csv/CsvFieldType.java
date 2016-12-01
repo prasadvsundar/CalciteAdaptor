@@ -77,10 +77,21 @@ enum CsvFieldType {
 		return MAP.get("date");
 	}catch(Exception e){
 		try{
+			if(typeString.contains(".")){
+				Double.parseDouble(typeString);
+				return MAP.get("double");
+			}else{
+				Integer.parseInt(typeString);
+				return MAP.get("int");
+			}
+		}catch(Exception e1){
+			try{
 			Integer.parseInt(typeString);
 			return MAP.get("int");
-		}catch(Exception e1){
-			return MAP.get("string");
+			}catch(Exception e2){
+				return MAP.get("string");
+			}
+			
 		}
 	}
   }
